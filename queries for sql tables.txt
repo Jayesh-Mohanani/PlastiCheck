@@ -1,0 +1,25 @@
+CREATE DATABASE IF NOT EXISTS plasticheck CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE plasticheck;
+
+CREATE TABLE IF NOT EXISTS user (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(128) NOT NULL,
+  email VARCHAR(128) NOT NULL UNIQUE,
+  password_hash VARCHAR(256) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS consumption_record (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  selected_categories TEXT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  regime VARCHAR(32),
+  percentages TEXT,
+  box1_path VARCHAR(256),
+  box2_path VARCHAR(256),
+  pie_path VARCHAR(256),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+SELECT * FROM user
+SELECT * FROM consumption_record

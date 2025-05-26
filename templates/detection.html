@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<div class="hero px-3 py-5 mb-5">
+  <h1 class="hero-title">Detection Methods</h1>
+  <p class="hero-tagline">How We Identify Microplastics in Food & Environment</p>
+</div>
+
+<section class="mb-5 px-3">
+  <!-- Method 1: FTIR -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h2 class="section-title">1. Fourier-Transform Infrared Spectroscopy (FTIR)</h2>
+      <p class="lead-lg">
+        FTIR spectroscopy identifies microplastics by measuring the specific infrared absorbance patterns of polymer bonds. This method can detect particles down to ~10 µm and distinguish between polymer types (e.g., polyethylene vs. polystyrene).
+      </p>
+      <p class="lead-lg">
+        In practice, environmental samples (water, soil, food digests) are filtered and the retained particles analysed with an FTIR microscope, providing both qualitative and quantitative data on microplastic composition.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <figcaption class="figure-caption text-muted">
+        Figure 1. FTIR analysis for microplastics
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\ftir_detection_method_1.jpg" alt="FTIR method" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Method 2: Raman -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-1">
+      <figcaption class="figure-caption text-muted">
+        Figure 2. Raman Spectroscopy analysis for microplastics
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\raman_detection_method_2.jpg" alt="Raman method" class="img-fluid" />
+      </div>
+    </div>
+    <div class="col-md-6 order-md-2">
+      <h2 class="section-title">2. Raman Spectroscopy</h2>
+      <p class="lead-lg">
+        Raman spectroscopy uses laser light scattering to produce a molecular fingerprint of microplastic particles. It’s capable of sub-micron resolution, making it ideal for detecting very small fragments in complex matrices.
+      </p>
+      <p class="lead-lg">
+        After isolating particles, researchers target individual pieces with a focused laser, collecting Raman shifts that match known polymer reference spectra.
+      </p>
+    </div>
+  </div>
+
+  <!-- Method 3: SEM/EDX -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h2 class="section-title">3. Scanning Electron Microscopy (SEM) & EDX</h2>
+      <p class="lead-lg">
+        SEM provides high-resolution imaging of microplastic morphology, including surface roughness and particle shape. When coupled with Energy-Dispersive X-Ray spectroscopy (EDX), it confirms elemental composition, differentiating plastics from natural particulates.
+      </p>
+      <p class="lead-lg">
+        Samples are coated with a thin conductive layer (e.g., gold) before imaging, allowing detailed visual and elemental mapping critical for forensic-style microplastic analysis.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <figcaption class="figure-caption text-muted">
+        Figure 3. SEM images of microplastics
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\sem_detection_method_3.png" alt="SEM method" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Method 4: TD-GC-MS -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-1">
+      <figcaption class="figure-caption text-muted">
+        Figure 4. TD-GC-MS analysis for microplastics
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\td_detection_method_4.jpg" alt="TD method" class="img-fluid" />
+      </div>
+    </div>
+    <div class="col-md-6 order-md-2">
+      <h2 class="section-title">4. Thermal Desorption–GC–MS (TD-GC-MS)</h2>
+      <p class="lead-lg">
+        TD-GC-MS thermally degrades microplastics into monomeric units, which are then separated by gas chromatography and identified via mass spectrometry. This provides both polymer type and additive profiling.
+      </p>
+      <p class="lead-lg">
+        It excels at quantifying low-abundance plastics in complex food samples, offering high sensitivity for trace microplastic detection.
+      </p>
+    </div>
+  </div>
+
+  <!-- CTA Button -->
+  <div class="text-center mb-5 px-3">
+    <a href="{{ url_for('effects') }}" class="btn btn-primary btn-lg">See the Effects of Microplastics</a>
+  </div>
+</section>
+
+{% endblock %}

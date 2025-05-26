@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- HERO SECTION -->
+<div class="hero px-3 py-5 mb-5">
+  <h1 class="hero-title">Microplastic Consumption Detector</h1>
+  <p class="hero-tagline">Check your Microplastic Consumption Rate here.</p>
+</div>
+
+<style>
+  .result-img {
+    width: 98vw;
+    max-width: 1200px;
+    height: 550px;
+    object-fit: contain;
+    margin-bottom: 2rem;
+    border: 3px solid #b2dfdb;
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .regime-table-custom {
+    width: 90vw !important;
+    max-width: 900px !important;
+    height: 260px !important;
+    font-size: 1.35rem;
+    margin: 0 auto 2rem auto;
+  }
+
+  @media (max-width: 991px) {
+    .result-img {
+      height: 320px;
+    }
+
+    .regime-table-custom {
+      font-size: 1rem;
+      height: 180px;
+    }
+  }
+</style>
+
+<div class="px-3 mb-5">
+  <h1 class="section-title text-center">Microplastic Consumption Checker</h1>
+
+  {% if not result %}
+  <!-- FORM -->
+  <form method="POST" id="checker-form">
+    <div class="mb-4">
+      <label for="continent" class="form-label">Select the Continent:</label>
+      <select id="continent" name="continent" class="form-select" required>
+        <option value="" disabled selected>Choose continent from the list</option>
+        {% for c in continents %}
+        <option value="{{ c }}">{{ c }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-4">
+      <label for="country" class="form-label">Select the Country of your Residence:</label>
+      <select id="country" name="country" class="form-select" disabled required>
+        <option value="" disabled selected>Select continent first</option>
+      </select>
+    </div>
+    <p class="lead-lg mb-2">Select at least five food categories to continue:</p>
+    <div class="row g-2 mb-4">
+      {% for food in food_categories %}
+      <div class="col-6 col-md-4">
+        <div class="form-check">
+          <input class="form-check-input category-checkbox" type="checkbox" name="categories" value="{{ food }}"
+            id="cat-{{ loop.index }}">
+          <label class="form-check-label" for="cat-{{ loop.index }}">{{ food.replace('_', ' ').title() }}</label>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-success btn-lg" id="submit-btn" disabled>Check Now</button>
+  </form>
+  {% else %}
+  <!-- RESULTS -->
+  <hr class="my-5">
+  <h2 class="mb-4 text-center text-success">Your Results:</h2>
+
+  <!-- Forecast Graph -->
+  <div class="mb-5 text-center">
+    <h4 class="mb-3">Forecast of Microplastic Consumption</h4>
+    <img src="{{ url_for('static', filename=result.box1_path) }}" class="result-img" alt="Forecast">
+  </div>
+
+  <!-- Percentage Increase -->
+  <div class="mb-5 text-center">
+    <h4 class="mb-3">Estimated Increase (2026–2030 vs 2025)</h4>
+    <span class="display-4 text-danger font-weight-bold">{{ result.percentages.increase }}%</span>
+  </div>
+
+  <!-- Selected Data Graph -->
+  <div class="mb-5 text-center">
+    <h4 class="mb-3">Selected Food Categories' Contribution</h4>
+    <img src="{{ url_for('static', filename=result.box2_path) }}" class="result-img" alt="Selected Data">
+  </div>
+
+  <!-- Importance Graph -->
+  <div class="mb-5 text-center">
+    <h4 class="mb-3">Overall Feature Importance</h4>
+    <img src="{{ url_for('static', filename=result.imp_path) }}" class="result-img" alt="Importance">
+  </div>
+
+  <!-- Distribution Graph -->
+  <div class="mb-5 text-center">
+    <h4 class="mb-3">Distribution of Selected vs Not Selected Categories</h4>
+    <img src="{{ url_for('static', filename=result.pie_path) }}" class="result-img"
+      style="height:400px; max-width:600px;" alt="Distribution">
+  </div>
+
+  <!-- Regime Table (HTML, not image) -->
+  <div class="mb-5 text-center">
+    <h4 class="mb-3">Regime Classification Table</h4>
+    <div class="table-responsive">
+      <table class="table table-bordered regime-table-custom">
+        <thead>
+          <tr class="table-success">
+            <th>Regime</th>
+            <th>Range (ug/kg)</th>
+            <th>Color</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Low</td>
+            <td>6.00 - 7.05</td>
+            <td style="background-color: #4caf50; color: #fff;">Green</td>
+          </tr>
+          <tr>
+            <td>Medium</td>
+            <td>7.06 - 7.74</td>
+            <td style="background-color: #ff9800; color: #fff;">Orange</td>
+          </tr>
+          <tr>
+            <td>High</td>
+            <td>7.75 - 8.19</td>
+            <td style="background-color: #f44336; color: #fff;">Red</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Regime Result -->
+    <div class="mt-4 mb-4" style="text-align:left; display:inline-block; font-size:1.2em;">
+      <div style="margin-bottom:8px;">
+        Calculated Microplastic Consumption in
+        <b>
+          {{ result.user_country }}
+        </b>
+        for the year 2025 is:
+        <b>
+          {{ result.current_value_2025 }} µg/kg
+        </b>
+      </div>
+      <span style="font-weight:bold; font-size:1.6em;">This falls under the </span>
+      {% if result.regime == 'Low' %}
+      <span style="color:#4caf50; font-weight:bold; font-size:1.6em;">Low Microplastic Consumption</span>
+      <span style="font-weight:bold; font-size:1.6em;"> regime.</span>
+      {% elif result.regime == 'Medium' %}
+      <span style="color:#ff9800; font-weight:bold; font-size:1.6em;">Medium Microplastic Consumption</span>
+      <span style="font-weight:bold; font-size:1.6em;"> regime.</span>
+      {% elif result.regime == 'High' %}
+      <span style="color:#f44336; font-weight:bold; font-size:1.6em;">High Microplastic Consumption</span>
+      <span style="font-weight:bold; font-size:1.6em;"> regime.</span>
+      {% else %}
+      <span style="font-weight:bold; font-size:1.6em;">{{ result.regime }} Microplastic Consumption regime.</span>
+      {% endif %}
+      {% if result.alert_msg %}
+      <span style="color:white; background:
+        {% if result.regime == 'Low' %}#4caf50
+        {% elif result.regime == 'Medium' %}#ff9800
+        {% elif result.regime == 'High' %}#f44336
+        {% else %}#888{% endif %};
+        padding:2px 8px; border-radius:5px; font-weight:bold; margin-left:8px;">
+        ({{ result.alert_msg }})
+      </span>
+      {% endif %}
+      <div style="margin-top:8px;">
+        <span style="font-weight:bold; font-size:1.6em;">This is </span>
+        {% if result.regime == 'Low' %}
+        <span style="color:#4caf50; font-weight:bold; font-size:1.6em;">Safe</span>
+        {% elif result.regime == 'Medium' %}
+        <span style="color:#ff9800; font-weight:bold; font-size:1.6em;">Moderate</span>
+        {% elif result.regime == 'High' %}
+        <span style="color:#f44336; font-weight:bold; font-size:1.6em;">Unsafe</span>
+        {% else %}
+        <span style="font-weight:bold; font-size:1.6em;">{{ result.regime }}</span>
+        {% endif %}
+        <span style="font-weight:bold; font-size:1.6em;"> for Human Consumption.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mitigation Tips -->
+  <div class="mb-5">
+    <h4 class="mb-3">Mitigation Strategies</h4>
+    <p class="lead-lg">To reduce microplastic consumption, consider these tips:</p>
+    <ul class="list-group mitigation-list">
+      {% for tip in result.mitigation %}
+      <li
+        class="list-group-item mitigation-tip {% if loop.index0 % 2 == 0 %}mitigation-bg-green{% else %}mitigation-bg-white{% endif %}">
+        <span class="mitigation-tip-number">{{ loop.index }}.</span> {{ tip }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  const COUNTRY_MAP = {{ countries | tojson }};
+  document.addEventListener('DOMContentLoaded', function () {
+    const continentSelect = document.getElementById('continent');
+    const countrySelect = document.getElementById('country');
+    const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function validateForm() {
+      const continentSelected = continentSelect && continentSelect.value;
+      const countrySelected = countrySelect && countrySelect.value && !countrySelect.disabled;
+      const checkedCount = Array.from(categoryCheckboxes).filter(c => c.checked).length;
+      submitBtn.disabled = !(continentSelected && countrySelected && checkedCount >= 5);
+    }
+
+    if (continentSelect && countrySelect) {
+      continentSelect.addEventListener('change', function () {
+        const selected = this.value;
+        countrySelect.innerHTML = '<option disabled selected>Select country</option>';
+        countrySelect.disabled = false;
+        if (COUNTRY_MAP[selected]) {
+          COUNTRY_MAP[selected].forEach(function (country) {
+            const opt = document.createElement('option');
+            opt.value = country;
+            opt.textContent = country;
+            countrySelect.appendChild(opt);
+          });
+        }
+        validateForm();
+      });
+      countrySelect.addEventListener('change', validateForm);
+    }
+    categoryCheckboxes.forEach(cb => cb.addEventListener('change', validateForm));
+    // Also validate on page load in case of browser autofill
+    validateForm();
+  });
+</script>
+{% endblock %}

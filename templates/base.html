@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PlastiCheck - Microplastic Consumption Detector" />
+  <meta name="keywords" content="PlastiCheck, Microplastics, Health, Awareness" />
+  <meta name="author" content="Jayesh Mohanani" />
+  <title>PlastiCheck - Healthcare Awareness</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Your custom styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="{{ url_for('index') }}">PlastiCheck</a>
+      <span class="navbar-text d-none d-md-inline mx-3">
+        Healthcare Awareness Through Data
+      </span>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('detection') }}">Detection</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('effects') }}">Effects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('checker') }}">Checker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+          </li>
+          {% if current_user.is_authenticated %}
+          <li class="nav-item d-flex align-items-center">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            <span class="nav-link p-0" style="background: none;">
+              <img src="{{ url_for('static', filename='img/user_icon.svg') }}" alt="Logged in" class="user-favicon"
+                style="width:32px; height:32px; margin-right:6px; vertical-align:middle;" />
+            </span>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login', next=request.path) }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('signup', next=request.path) }}">Sign Up</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container" style="padding-top: 0px;">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer">
+      <div class="footer-content text-center py-3">
+        <p>&copy; {{ current_year or 2025 }} PlastiCheck | A Project on Consumption of Microplastics and Its Health
+          Impacts</p>
+        <p>
+          Designed with care for health, safety and the environment •
+          <a href="{{ url_for('about') }}">Learn More</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (with Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>

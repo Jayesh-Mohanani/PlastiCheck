@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<div class="hero px-3 py-5 mb-5">
+  <h1 class="hero-title">Harmful Effects on Human Health</h1>
+  <p class="hero-tagline">Understanding the Impact of Microplastics</p>
+</div>
+
+<section class="mb-5 px-3">
+  <!-- Row 1: Text Left, Image Right -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h2 class="section-title">Inflammation & Oxidative Stress</h2>
+      <p class="lead-lg">
+        Microplastics trigger chronic inflammation by activating immune cells and releasing pro-inflammatory cytokines. Studies link exposure to elevated oxidative stress markers in liver and gut tissues.
+      </p>
+      <p class="lead-lg">
+        This oxidative stress can damage cellular components, leading to cell death and tissue injury. Long-term exposure may contribute to chronic diseases like cardiovascular disorders and metabolic syndrome.
+        Microplastics can also disrupt gut barrier function, allowing harmful substances to enter the bloodstream and exacerbate inflammation. This compromised barrier integrity may lead to a condition known as "leaky gut," which has been associated with autoimmune diseases, allergies, and chronic inflammation.
+      </p>
+      <p class="lead-lg">
+        Additionally, microplastics may interact with gut epithelial cells, impairing their ability to absorb nutrients effectively. Over time, this can contribute to malnutrition and other systemic health issues, further highlighting the need for preventive measures and research into mitigating these effects.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <figcaption class="figure-caption text-muted">
+        Figure 1. Inflammation and oxidative stress due to microplastics
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\oxidative_stress_due_to_mp.png" alt="Inflammation and oxidative stress" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Image Left, Text Right -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-1">
+      <figcaption class="figure-caption text-muted">
+        Figure 2. Endoctrine Disruption due to microplastics
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\endoctrine_disruption_due _to_mp.jpg" alt="Endoctrine Disruption" class="img-fluid" />
+      </div>
+    </div>
+    <div class="col-md-6 order-md-2">
+      <h2 class="section-title">Endocrine Disruption</h2>
+      <p class="lead-lg">
+        Certain plastic additives (phthalates, bisphenols) mimic hormones, interfering with thyroid, reproductive, and metabolic pathways. Laboratory animals show altered hormone levels and fertility issues after exposure.
+      </p>
+      <p class="lead-lg">
+        Early-life exposure raises particular concern, as endocrine disruption during development can lead to long-term health effects.
+        Microplastics may also affect the gut microbiome, which plays a crucial role in hormone regulation and metabolism. Disruption of the gut microbiome can further exacerbate endocrine-related health issues, including obesity, diabetes, and reproductive disorders.
+      </p>
+    </div>
+  </div>
+
+  <!-- Row 3: Text Left, Image Right -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h2 class="section-title">Gut Microbiome Alteration</h2>
+      <p class="lead-lg">
+        Ingested microplastics disturb the balance of gut bacteria, reducing beneficial species and promoting opportunistic pathogens. This dysbiosis is linked to gastrointestinal inflammation and metabolic disorders.
+      </p>
+      <p class="lead-lg">
+        Fiber-rich diets and probiotics may help restore microbiome balance, but preventing exposure remains paramount. Consuming a diet rich in prebiotics and probiotics can promote the growth of beneficial gut bacteria, potentially mitigating some of the adverse effects caused by microplastics. However, reducing environmental exposure to microplastics through policy changes, improved waste management, and public awareness campaigns is essential for long-term health benefits.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <figcaption class="figure-caption text-muted">
+        Figure 3. Gut Microbiome Alternation due to microplastics
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\gut_microbiome_due_to_mp.png" alt="Gut Microbiome Alternation" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 4: Image Left, Text Right -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-1">
+      <figcaption class="figure-caption text-muted">
+        Figure 4. Microplastics act as Vectors for Carcinogens
+      </figcaption>
+      <div class="img-placeholder mb-3">
+        <img src="..\static\img\vectors_of_mp.jpg" alt="Vectors of MP" class="img-fluid" />
+      </div>
+    </div>
+    <div class="col-md-6 order-md-2">
+      <h2 class="section-title">Vector for Carcinogens</h2>
+      <p class="lead-lg">
+        Microplastics adsorb persistent organic pollutants and heavy metals, transporting them into tissues. Chronic exposure may increase cancer risk by delivering these co-toxins directly to cells.
+      </p>
+      <p class="lead-lg">
+        The potential for microplastics to act as vectors for carcinogens raises significant concerns about their role in cancer development. Studies have shown that microplastics can adsorb various toxic substances, including heavy metals and persistent organic pollutants (POPs), which are known to have carcinogenic properties.
+        When microplastics enter the human body, they can release these harmful substances, leading to cellular damage and increasing the risk of cancer.
+      </p>
+      <p class="lead-lg">
+        Research is ongoing to quantify this vector effect in human populations. Understanding the extent of this risk is critical for developing strategies to mitigate exposure and protect public health.
+      </p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="text-center mb-5 px-3">
+    <a href="{{ url_for('checker') }}" class="btn btn-primary btn-lg">Check Your Consumption Rate Now</a>
+  </div>
+</section>
+
+{% endblock %}
