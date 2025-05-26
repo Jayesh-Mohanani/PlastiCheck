@@ -1,9 +1,9 @@
 # PlastiCheck - Microplastic Consumption Detector in Various Food Items
-PlastiCheck is a web app that predicts and visualises dietary microplastic exposure by country and food habits. Get personalised risk classification, interactive analytics, and practical health tips to help reduce microplastic intake and make informed choices.
+PlastiCheck is created as a project that predicts and visualises dietary microplastic exposure by country and food habits. Get personalised risk classification, interactive analytics, and practical health tips to help reduce microplastic intake and make informed choices.
 
 ## **PlastiCheck: Microplastic Consumption Detector**
 
-**PlastiCheck** is a web application that empowers users to assess and forecast their dietary microplastic exposure based on their location and food choices. Leveraging machine learning and global food data, PlastiCheck provides personalised risk regimes, visual analytics, and actionable mitigation strategies to help users make healthier, more sustainable decisions.
+**PlastiCheck** is a web application-based ML model that empowers users to assess and forecast their dietary microplastic exposure based on their location and food choices. Leveraging machine learning and global food data, PlastiCheck provides personalised risk regimes, visual analytics, and actionable mitigation strategies to help users make healthier, more sustainable decisions.
 
 **Features:**
 - Predicts microplastic consumption for any country and food category selection
